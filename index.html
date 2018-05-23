@@ -143,6 +143,72 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-hadoop" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/24/hadoop/">hadoop</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/24/hadoop/" class="archive-article-date">
+  	<time datetime="2018-05-23T17:34:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="hadoop安装出错解决"><a href="#hadoop安装出错解决" class="headerlink" title="hadoop安装出错解决"></a>hadoop安装出错解决</h3><h4 id="JAVA-HOME"><a href="#JAVA-HOME" class="headerlink" title="JAVA_HOME"></a>JAVA_HOME</h4><p>由于java在安装hadoop之前就已经有了，所以直接安装hadoop，没有重新配置JAVA_HOME，在运行<figure class="highlight plain"><figcaption><span>./bin/hdfs namenode -format```，之后```Exitting with status 1``` ```Error: JAVA_HOME is not set and could not be found``` 说明JAVA_HOME和hadoop之间关联错误</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 解决：</span><br><span class="line">到hadoop的安装目录修改配置文件```/usr/local/hadoop/etc/hadoop/hadoop-env.sh```，在里面找到```export JAVA_HOME=$&#123;JAVA_HOME&#125;```这行，然后，把它修改成JAVA安装路径的具体地址，比如，```export JAVA_HOME=/usr/lib/jvm/java-8-oracle```，然后，再次启动Hadoop（java_home位置可以通过command``` echo $JAVA_HOME```查看）</span><br><span class="line"></span><br><span class="line">#### 开启NameNode和DataNode守护进程</span><br><span class="line">```sudo ./sbin/start-dfs.sh```之后，出现```root@localhost&apos;s password:localhost:permission denied,please try again```，但是我输入的密码的确是正确的，在```sudo passwd```重置密码之后，仍然报错</span><br><span class="line"></span><br><span class="line">##### 解决：</span><br><span class="line">使用root用户登录ssh，编辑配置文件：```sudo gedit /etc/ssh/sshd_config```(ps:本人太菜，vim用不惯,gedit凑合用)；</span><br><span class="line"></span><br><span class="line">找到```PermitRootLogin prohibit-password禁用</span><br></pre></td></tr></table></figure></p>
+<p>添加<figure class="highlight plain"><figcaption><span>yes```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最后 重启ssh ```sudo service ssh restart</span><br></pre></td></tr></table></figure></p>
+<h4 id="gedit-修改配置文件xml"><a href="#gedit-修改配置文件xml" class="headerlink" title="gedit 修改配置文件xml"></a>gedit 修改配置文件xml</h4><p>Failed to connect to Mir: Failed to connect to server socket: 没有那个文件或目录<br>Unable to init server: 无法连接： 拒绝连接</p>
+<h5 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h5><p><code>export DISPLAY=:0.0</code>对这个解决方案，个人很懵…</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/24/hadoop/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     

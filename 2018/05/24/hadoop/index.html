@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://zhongyaoc.github.io">
-  <title>Archives | Zhong</title>
+  <title>hadoop | Zhong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Man proposes,God disposes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zhong">
-<meta property="og:url" content="https://zhongyaoc.github.io/archives/index.html">
+  <meta name="description" content="hadoop安装出错解决JAVA_HOME由于java在安装hadoop之前就已经有了，所以直接安装hadoop，没有重新配置JAVA_HOME，在运行./bin/hdfs namenode -format```，之后```Exitting with status 1``` ```Error: JAVA_HOME is not set and could not be found``` 说明JAV">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop">
+<meta property="og:url" content="https://zhongyaoc.github.io/2018/05/24/hadoop/index.html">
 <meta property="og:site_name" content="Zhong">
-<meta property="og:description" content="Man proposes,God disposes">
+<meta property="og:description" content="hadoop安装出错解决JAVA_HOME由于java在安装hadoop之前就已经有了，所以直接安装hadoop，没有重新配置JAVA_HOME，在运行./bin/hdfs namenode -format```，之后```Exitting with status 1``` ```Error: JAVA_HOME is not set and could not be found``` 说明JAV">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2018-05-23T17:35:03.204Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Zhong">
-<meta name="twitter:description" content="Man proposes,God disposes">
+<meta name="twitter:title" content="hadoop">
+<meta name="twitter:description" content="hadoop安装出错解决JAVA_HOME由于java在安装hadoop之前就已经有了，所以直接安装hadoop，没有重新配置JAVA_HOME，在运行./bin/hdfs namenode -format```，之后```Exitting with status 1``` ```Error: JAVA_HOME is not set and could not be found``` 说明JAV">
   
     <link rel="alternative" href="/atom.xml" title="Zhong" type="application/atom+xml">
   
@@ -141,152 +142,138 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-hadoop" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      hadoop
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/24/hadoop/" class="archive-article-date">
+
+        
+        <a href="/2018/05/24/hadoop/" class="archive-article-date">
   	<time datetime="2018-05-23T17:34:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/24/hadoop/">hadoop</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="hadoop安装出错解决"><a href="#hadoop安装出错解决" class="headerlink" title="hadoop安装出错解决"></a>hadoop安装出错解决</h3><h4 id="JAVA-HOME"><a href="#JAVA-HOME" class="headerlink" title="JAVA_HOME"></a>JAVA_HOME</h4><p>由于java在安装hadoop之前就已经有了，所以直接安装hadoop，没有重新配置JAVA_HOME，在运行<figure class="highlight plain"><figcaption><span>./bin/hdfs namenode -format```，之后```Exitting with status 1``` ```Error: JAVA_HOME is not set and could not be found``` 说明JAVA_HOME和hadoop之间关联错误</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 解决：</span><br><span class="line">到hadoop的安装目录修改配置文件```/usr/local/hadoop/etc/hadoop/hadoop-env.sh```，在里面找到```export JAVA_HOME=$&#123;JAVA_HOME&#125;```这行，然后，把它修改成JAVA安装路径的具体地址，比如，```export JAVA_HOME=/usr/lib/jvm/java-8-oracle```，然后，再次启动Hadoop（java_home位置可以通过command``` echo $JAVA_HOME```查看）</span><br><span class="line"></span><br><span class="line">#### 开启NameNode和DataNode守护进程</span><br><span class="line">```sudo ./sbin/start-dfs.sh```之后，出现```root@localhost&apos;s password:localhost:permission denied,please try again```，但是我输入的密码的确是正确的，在```sudo passwd```重置密码之后，仍然报错</span><br><span class="line"></span><br><span class="line">##### 解决：</span><br><span class="line">使用root用户登录ssh，编辑配置文件：```sudo gedit /etc/ssh/sshd_config```(ps:本人太菜，vim用不惯,gedit凑合用)；</span><br><span class="line"></span><br><span class="line">找到```PermitRootLogin prohibit-password禁用</span><br></pre></td></tr></table></figure></p>
+<p>添加<figure class="highlight plain"><figcaption><span>yes```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">最后 重启ssh ```sudo service ssh restart</span><br></pre></td></tr></table></figure></p>
+<h4 id="gedit-修改配置文件xml"><a href="#gedit-修改配置文件xml" class="headerlink" title="gedit 修改配置文件xml"></a>gedit 修改配置文件xml</h4><p>Failed to connect to Mir: Failed to connect to server socket: 没有那个文件或目录<br>Unable to init server: 无法连接： 拒绝连接</p>
+<h5 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h5><p><code>export DISPLAY=:0.0</code>对这个解决方案，个人很懵…</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://zhongyaoc.github.io/2018/05/24/hadoop/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/17/hello-world/" class="archive-article-date">
-  	<time datetime="2018-05-17T12:59:50.811Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/17/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/17/hello-world/">Hello World</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/17/xgboost/" class="archive-article-date">
-  	<time datetime="2018-05-17T12:42:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/17/xgboost/">XGboost</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">machine learning</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/13/grammer/" class="archive-article-date">
-  	<time datetime="2018-05-13T05:54:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/13/grammer/">Grammer</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">English</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -309,8 +296,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
