@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Zhong">
 <meta property="og:description" content="hadoop安装出错解决JAVA_HOME由于java在安装hadoop之前就已经有了，所以直接安装hadoop，没有重新配置JAVA_HOME，在运行sudo ./bin/hdfs namenode -format之后Exitting with status 1 以及 Error: JAVA_HOME is not set and could not be found说明JAVA_HOME和ha">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2018-05-24T04:47:42.722Z">
+<meta property="og:updated_time" content="2018-05-24T04:50:27.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hadoop">
 <meta name="twitter:description" content="hadoop安装出错解决JAVA_HOME由于java在安装hadoop之前就已经有了，所以直接安装hadoop，没有重新配置JAVA_HOME，在运行sudo ./bin/hdfs namenode -format之后Exitting with status 1 以及 Error: JAVA_HOME is not set and could not be found说明JAVA_HOME和ha">
@@ -162,7 +162,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="hadoop安装出错解决"><a href="#hadoop安装出错解决" class="headerlink" title="hadoop安装出错解决"></a>hadoop安装出错解决</h3><h4 id="JAVA-HOME"><a href="#JAVA-HOME" class="headerlink" title="JAVA_HOME"></a>JAVA_HOME</h4><p>由于java在安装hadoop之前就已经有了，所以直接安装hadoop，没有重新配置JAVA_HOME，在运行<br><code>sudo ./bin/hdfs namenode -format</code><br>之后<code>Exitting with status 1</code> 以及 <code>Error: JAVA_HOME is not set and could not be found</code>说明JAVA_HOME和hadoop之间关联错误<br><a id="more"></a></p>
+        <h3 id="hadoop安装出错解决"><a href="#hadoop安装出错解决" class="headerlink" title="hadoop安装出错解决"></a>hadoop安装出错解决</h3><h4 id="JAVA-HOME"><a href="#JAVA-HOME" class="headerlink" title="JAVA_HOME"></a>JAVA_HOME</h4><p>由于java在安装hadoop之前就已经有了，所以直接安装hadoop，没有重新配置JAVA_HOME，在运行<br><code>sudo ./bin/hdfs namenode -format</code><br>之后<code>Exitting with status 1</code> 以及 <code>Error: JAVA_HOME is not set and could not be found</code>说明JAVA_HOME和hadoop之间关联错误</p>
+<a id="more"></a>
 <h5 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h5><p>到hadoop的安装目录修改配置文件<code>/usr/local/hadoop/etc/hadoop/hadoop-env.sh</code>，在里面找到<code>export JAVA_HOME=${JAVA_HOME}</code>这行，然后，把它修改成JAVA安装路径的具体地址，比如，<code>export JAVA_HOME=/usr/lib/jvm/java-8-oracle</code>，然后，再次启动Hadoop（java_home位置可以通过command<code>echo $JAVA_HOME</code>查看）</p>
 <h4 id="开启NameNode和DataNode守护进程"><a href="#开启NameNode和DataNode守护进程" class="headerlink" title="开启NameNode和DataNode守护进程"></a>开启NameNode和DataNode守护进程</h4><p><code>sudo ./sbin/start-dfs.sh</code>之后，出现<code>root@localhost&#39;s password:localhost:permission denied,please try again</code>但是我输入的密码的确是正确的，在<code>sudo passwd</code>重置密码之后，仍然报错<br>另外如果<code>jps</code>之后发现，namenode没有启动，可以删除tmp文件之后，重新format</p>
 <h5 id="解决：-1"><a href="#解决：-1" class="headerlink" title="解决："></a>解决：</h5><p>使用root用户登录ssh，编辑配置文件：<code>sudo gedit /etc/ssh/sshd_config</code>(ps:本人太菜，vim用不惯,gedit凑合用)；</p>
